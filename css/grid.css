@@ -1,0 +1,36 @@
+.grid{
+	
+}
+[class*='col'] {
+  float: left;
+  width: 20%;
+}
+.header{
+	background-color: LightSteelBlue  ;
+}
+.header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.col-header:hover{
+	background-color: lightgrey;
+}
+.content {
+	overflow:auto;
+	height:200px;
+}
+.row{
+	border:solid;
+	border-width: 1px;
+	border-color:lightblue;
+	background-color: Ivory ;
+}
+.row:hover{
+	background-color: lightblue;
+}
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
