@@ -1,4 +1,5 @@
 function Grid(divnode){
+	
 	var that = this;
 	var id = divnode.getAttribute("id");
 	var header = document.createElement("div");
@@ -13,7 +14,9 @@ function Grid(divnode){
 	};
 	
 	this.drawheader = function(cols){
+		
 		var row =  document.createElement("div");
+		
 		cols.forEach(function(elem, index){
 			var col = document.createElement("div");
 			var text = document.createTextNode(elem);
@@ -22,12 +25,12 @@ function Grid(divnode){
 			col.className = "col-header";
 			col.addEventListener('click', function (ev) {
 				wrapper.sort(ev.currentTarget.firstChild.textContent, function(a,b){
-					if( typeof a == 'string'){
+					if(typeof a == 'string'){
 						return a.localeCompare(b);
 					}else{
 						return a - b == 0 ? -1 : a - b;
 					}
-				})
+				});
 				that.deletecontent();
 				that.drawcontent();
 			});
@@ -81,6 +84,7 @@ function Grid(divnode){
 	}
 	
 	function createrow(elem, id){
+		
 		var row = document.createElement("div");
 		
 		row.className = "row";
@@ -131,6 +135,7 @@ function DataWrapper(json){
 	this.length = objectArray.length;
 	
 	function ColumnWrapper(length){
+		
 		var that = this;
 		var columnData = new Array(length);
 				
@@ -149,7 +154,7 @@ function DataWrapper(json){
 		this.sort = function(f){
 			columnData.sort(function(a,b){
 				return f(a[1], b[1]);
-			})
+			});
 		};
 	}
 }
