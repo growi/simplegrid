@@ -5,17 +5,19 @@
 		<title>Simple Grid Test</title>
 		<script type="text/javascript" src="../js/Grid.js"></script>
 		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src="../js/sort.js"></script>
 		<link rel="stylesheet" type="text/css" href="../css/grid.css">
 	</head>
 	<body>
-		<div id="grid" class="grid"></div>
+		<div id="grid1" class="grid"></div>
 		<script>
-			var g = new Grid(document.getElementById("grid"));
-			var data = createData(1000);
-
-			g.bind(data);
-			g.drawheader(["id","value"]);
-			g.drawcontent();
+			var g1 = new Grid(document.getElementById("grid1"));
+			var data1 = createData(1000);
+			
+			g1.bind(data1);
+			g1.drawheader(["id","value"]);
+			g1.drawcontent();
+			
 		</script>
 	</body>
 </html>
