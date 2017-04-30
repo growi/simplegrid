@@ -21,7 +21,7 @@ function Grid(divnode){
 			col.appendChild(text);
 			col.className = "col-header";
 			col.addEventListener('click', function (ev) {
-				wrapper.sort(ev.srcElement.firstChild.textContent, function(a,b){
+				wrapper.sort(ev.currentTarget.firstChild.textContent, function(a,b){
 					if( typeof a == 'string'){
 						return a.localeCompare(b);
 					}else{
@@ -58,12 +58,23 @@ function Grid(divnode){
 	this.appendrow = function(elem){
 		content.appendChild(createrow(elem));
 	};
-		
+	
+	this.removefirst = function(){
+		content.removeChild(content.firstChild);
+	};
+
+	this.removelast = function(){
+		content.removeChild(content.lastChild);
+	};
+	
 	function init(root){
 
 		header.setAttribute("gridid", id);
 		content.setAttribute("gridid", id);
 		content.className = "content";
+		content.addEventListener('scroll', function (ev) {
+				console.log("scroll content" + content.scrollTop);
+			});
 		root.setAttribute("gridid", id);
 		root.appendChild(header);
 		root.appendChild(content);
@@ -98,25 +109,47 @@ function DataWrapper(json){
 		objectArray.forEach(function(elem, index){
 			for(var prop in elem) {
 				if(fields[prop] === undefined){
-					fields[prop] = new Array(objectArray.length);
+					fields[prop] = new ColumnWrapper(objectArray.length);
 				}
-				fields[prop][index] = [index, elem[prop]];
+				fields[prop].setdata(index, elem[prop]);
 			}
 		});
 		orderBy = Object.getOwnPropertyNames(fields)[0];
 	}
 
 	this.getrowdata = function(num){
-		return objectArray[fields[orderBy][num][0]];
+		return objectArray[fields[orderBy].getkey(num)];
 	}
 	
 	this.sort = function(column, f){
 		if(fields[column] !== undefined){
-			fields[column].sort(function(a,b){
-				return f(a[1], b[1]);
-			});
+			fields[column].sort(f);
 			orderBy = column;
 		}
 	};
+	
 	this.length = objectArray.length;
+	
+	function ColumnWrapper(length){
+		var that = this;
+		var columnData = new Array(length);
+				
+		this.getkey = function(index){
+			return columnData[index][0];
+		}
+		
+		this.getdata = function(index){
+			return columnData[index][1];
+		}
+		
+		this.setdata = function(index, data){
+			columnData[index] = [index, data];
+		}
+		
+		this.sort = function(f){
+			columnData.sort(function(a,b){
+				return f(a[1], b[1]);
+			})
+		};
+	}
 }

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Simple Sort Test</title>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src="../js/sort.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/grid.css">
+	</head>
+	<body>
+		<script>
+		
+			var data1 = createData(1000000);
+			var data2 = data1.slice();
+			var data3 = data1.slice();
+			var data4 = data1.slice();
+			var comp = function(a,b){
+				return (a.id - b.id); 
+			}
+			console.log("random");
+		
+			var start = Date.now();
+			mergesort_one(data1,comp);
+			var msstop_one =  Date.now() - start;
+			console.log("mergesort_one: ", msstop_one);
+			
+			start = Date.now();
+			mergesort_two(data2,comp);
+			var msstop_two =  Date.now() - start;
+			console.log("mergesort_two: ", msstop_two);
+
+			start = Date.now();
+			mergesort(data3,comp);
+			msstop =  Date.now() - start;
+			console.log("mergesort: ", msstop);
+			
+			start = Date.now();
+			data4.sort(comp);
+			var stop = Date.now() - start;
+			
+			console.log("sort: ", stop);
+			console.log("sort/one %: ", msstop_one *100 / stop);
+			console.log("sort/two %: ", msstop_two *100 / stop);
+			console.log("sort/new %: ", msstop *100 / stop);
+
+			console.log("sorted");
+			
+			var start = Date.now();
+			mergesort_one(data1,comp);
+			var msstop_one =  Date.now() - start;
+			console.log("mergesort_one: ", msstop_one);
+			
+			start = Date.now();
+			mergesort_two(data2,comp);
+			var msstop_two =  Date.now() - start;
+			console.log("mergesort_two: ", msstop_two);
+
+			start = Date.now();
+			mergesort(data3,comp);
+			msstop =  Date.now() - start;
+			console.log("mergesort: ", msstop);
+			
+			start = Date.now();
+			data4.sort(comp);
+			var stop = Date.now() - start;
+			
+			console.log("sort: ", stop);
+			console.log("sort/one %: ", msstop_one *100 / stop);
+			console.log("sort/two %: ", msstop_two *100 / stop);
+			console.log("sort/new %: ", msstop *100 / stop);
+			
+			data1.reverse();
+			data2 = data1.slice();
+			data3 =data1.slice();
+			data4 = data1.slice();
+			console.log("reversed");
+			
+			var start = Date.now();
+			mergesort_one(data1,comp);
+			var msstop_one =  Date.now() - start;
+			console.log("mergesort_one: ", msstop_one);
+			
+			start = Date.now();
+			mergesort_two(data2,comp);
+			var msstop_two =  Date.now() - start;
+			console.log("mergesort_two: ", msstop_two);
+
+			start = Date.now();
+			mergesort(data3,comp);
+			msstop =  Date.now() - start;
+			console.log("mergesort: ", msstop);
+			
+			start = Date.now();
+			data4.sort(comp);
+			var stop = Date.now() - start;
+			
+			console.log("sort: ", stop);
+			console.log("sort/one %: ", msstop_one *100 / stop);
+			console.log("sort/two %: ", msstop_two *100 / stop);
+			console.log("sort/new %: ", msstop *100 / stop);
+
+		</script>
+	</body>
+</html>
